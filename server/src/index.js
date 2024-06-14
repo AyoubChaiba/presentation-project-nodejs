@@ -3,18 +3,22 @@ import mongoose from'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './router/auth.js';
 import userRouter from './router/user.js';
+import postRouter from './router/post.js';
+import cors from 'cors';
+
 
 const app = express();
 
 dotenv.config();
 
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
 const { PORT, MONGO_URL } = process.env;
 
 app.use('/api', authRouter);
 app.use('/api', userRouter);
+app.use('/api', postRouter);
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on port ${PORT}`);
